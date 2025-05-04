@@ -13,11 +13,18 @@ public class SpawnBulletManager : MonoBehaviour
     public Transform player;
     public bool gameOver=false;
     private float activeTime=4.0f;
+    private float minActiveTime=1.0f;
+    private float difficultyInterval=5.0f;
+    public float bulletSpeed=5.0f;
+    private float speedIncrement=1.0f;
+    private float maxBulletSpeed=15.0f;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
         StartCoroutine(SpawnBullets());
+        InvokeRepeating("IncreaseDifficulty",difficultyInterval,difficultyInterval);
         
     }
 
@@ -41,8 +48,16 @@ public class SpawnBulletManager : MonoBehaviour
             atRight=!atRight;
             yield return new WaitForSeconds(activeTime);
         }
-        
     }
 
 
+    void IncreaseDifficulty(){
+        if(activeTime>minActiveTime){
+            activeTime-=speedIncrement;
+            Debug.Log("Decreased Spawn time for bullets");
+        }
+        if(bulletSpeed<maxBulletSpeed){
+            bulletSpeed+=speedIncrement;
+        }
+    }
 }

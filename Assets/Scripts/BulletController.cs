@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class BulletController : MonoBehaviour
 {
     public float bulletSpeed=5.0f;
-    
     public Vector2 direction;
     private Rigidbody2D bulletRb;
     public SpawnBulletManager bulletManager;
@@ -19,9 +18,7 @@ public class BulletController : MonoBehaviour
         bulletRb = GetComponent<Rigidbody2D> ();
         bulletManager = FindAnyObjectByType<SpawnBulletManager>();
         Player = GameObject.FindWithTag("Player");
-        
-      
-        
+        bulletSpeed = bulletManager.bulletSpeed;
     }
 
     // Update is called once per frame
